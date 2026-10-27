@@ -29,7 +29,6 @@ const reglasCrearLibro = [
 		.withMessage('ejemplares debe ser un entero entre 1 y 50'),
 ];
 
-// L1 · GET /api/libros — listar con filtros y paginación
 router.get(
 	'/',
 	query('buscar').optional().isString(),
@@ -49,7 +48,6 @@ router.get(
 	controlador.listar
 );
 
-// L2 · GET /api/libros/:id — ver un libro
 router.get(
 	'/:id',
 	param('id').isInt({ min: 1 }).withMessage('El id debe ser un entero positivo'),
@@ -57,7 +55,6 @@ router.get(
 	controlador.obtener
 );
 
-// L3 · POST /api/libros — registrar un libro
 router.post('/', reglasCrearLibro, validar, controlador.crear);
 
 export default router;

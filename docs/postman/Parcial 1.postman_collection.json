@@ -20,7 +20,7 @@
           },
           "response": [
             {
-              "name": "Listar Libros (400)",
+              "name": "Listar Libros (200)",
               "originalRequest": {
                 "method": "GET",
                 "header": [],
@@ -738,6 +738,891 @@
               ],
               "cookie": [],
               "body": "{\n  \"error\": \"Datos inválidos\",\n  \"detalles\": [\n    {\n      \"campo\": \"titulo\",\n      \"mensaje\": \"El título es obligatorio\"\n    },\n    {\n      \"campo\": \"autor\",\n      \"mensaje\": \"El autor es obligatorio\"\n    },\n    {\n      \"campo\": \"ejemplares\",\n      \"mensaje\": \"ejemplares debe ser un entero entre 1 y 50\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Prestar Libro",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 3\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/socios/3/prestamos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "socios",
+                "3",
+                "prestamos"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Prestar Libro (201)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "207"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"cf-JOoTe3HNkLcLpS9zh2DLWdjsg1w\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:41:11 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 4,\n  \"socioId\": 1,\n  \"libroId\": 1,\n  \"estado\": \"ACTIVO\",\n  \"fechaPrestamo\": \"2026-10-27T03:41:11.850Z\",\n  \"fechaLimite\": \"2026-11-10T03:41:11.819Z\",\n  \"fechaDevolucion\": null,\n  \"libro\": {\n    \"id\": 1,\n    \"titulo\": \"Cien años de soledad\"\n  }\n}"
+            },
+            {
+              "name": "Datos Invalidos (400)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": \"abc\",\r\n  \"libroId\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "177"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"b1-QxLVI6AagsDxBGw0fqbS6CrkFUo\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:42:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Datos inválidos\",\n  \"detalles\": [\n    {\n      \"campo\": \"socioId\",\n      \"mensaje\": \"socioId debe ser un entero positivo\"\n    },\n    {\n      \"campo\": \"libroId\",\n      \"mensaje\": \"libroId debe ser un entero positivo\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "Socio no existe (404)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 999,\r\n  \"libroId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "31"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1f-VXX8j9CbUvVkj5Zk6Cmd/yi53Bs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:43:13 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Socio no encontrado\"\n}"
+            },
+            {
+              "name": "Libro no existe (404)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 999\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "31"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1f-r40I3blXCrq1C/QbVOowi+bee9Y\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:44:03 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Libro no encontrado\"\n}"
+            },
+            {
+              "name": "Socio ya tiene 3 préstamos (409)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 3,\r\n  \"libroId\": 1\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "50"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"32-ez+5QDEwbmUIt2aTl36I7kFcDpk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:45:02 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"El socio ya tiene 3 préstamos activos\"\n}"
+            },
+            {
+              "name": "Libro sin ejemplares disponibles (409)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "52"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"34-GIyD6C9Y/fLiW/O3jwyTBUlRSCg\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:46:53 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"El libro no tiene ejemplares disponibles\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Devolver un préstamo",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "name": "Devolver préstamo activo (200)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos/4/devolucion",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos",
+                    "4",
+                    "devolucion"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "181"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"b5-+eLa2V2dUFgz9koPjy0BGwRSbu4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:48:55 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 4,\n  \"socioId\": 1,\n  \"libroId\": 1,\n  \"estado\": \"DEVUELTO\",\n  \"fechaPrestamo\": \"2026-10-27T03:41:11.850Z\",\n  \"fechaLimite\": \"2026-11-10T03:41:11.819Z\",\n  \"fechaDevolucion\": \"2026-10-27T03:48:55.439Z\"\n}"
+            },
+            {
+              "name": "Intentar devolver el mismo préstamo por segunda vez (409)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos/4/devolucion",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos",
+                    "4",
+                    "devolucion"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "40"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"28-Eq/me7d02eIZ3/rOAZCwvYAM8jE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:50:51 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"El préstamo ya fue devuelto\"\n}"
+            },
+            {
+              "name": "Préstamo que no existe (404)",
+              "originalRequest": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/prestamos/999/devolucion",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "prestamos",
+                    "999",
+                    "devolucion"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "35"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"23-MOKgEgarJ9M9Rq7CleDX/ued7o8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:51:42 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Préstamo no encontrado\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Historial de préstamos de un socio",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/api/socios/999/prestamos",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "socios",
+                "999",
+                "prestamos"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Préstamos de un socio (200)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"socioId\": 1,\r\n  \"libroId\": 3\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/socios/3/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "socios",
+                    "3",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "716"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2cc-1lwpZFR9iJjEizlPQCK1XlCeros\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:52:44 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 3,\n    \"socioId\": 3,\n    \"libroId\": 4,\n    \"estado\": \"ACTIVO\",\n    \"fechaPrestamo\": \"2026-10-27T01:43:01.913Z\",\n    \"fechaLimite\": \"2026-11-10T01:43:01.902Z\",\n    \"fechaDevolucion\": null,\n    \"libro\": {\n      \"id\": 4,\n      \"titulo\": \"Node.js Design Patterns\",\n      \"autor\": \"Mario Casciaro\"\n    }\n  },\n  {\n    \"id\": 2,\n    \"socioId\": 3,\n    \"libroId\": 3,\n    \"estado\": \"ACTIVO\",\n    \"fechaPrestamo\": \"2026-10-27T01:43:01.909Z\",\n    \"fechaLimite\": \"2026-11-10T01:43:01.902Z\",\n    \"fechaDevolucion\": null,\n    \"libro\": {\n      \"id\": 3,\n      \"titulo\": \"Clean Code\",\n      \"autor\": \"Robert C. Martin\"\n    }\n  },\n  {\n    \"id\": 1,\n    \"socioId\": 3,\n    \"libroId\": 2,\n    \"estado\": \"ACTIVO\",\n    \"fechaPrestamo\": \"2026-10-27T01:43:01.905Z\",\n    \"fechaLimite\": \"2026-11-10T01:43:01.902Z\",\n    \"fechaDevolucion\": null,\n    \"libro\": {\n      \"id\": 2,\n      \"titulo\": \"El amor en los tiempos del cólera\",\n      \"autor\": \"Gabriel García Márquez\"\n    }\n  }\n]"
+            },
+            {
+              "name": "Filtrar por estado devuelto (200)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/socios/3/prestamos?estado=ACTIVO",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "socios",
+                    "3",
+                    "prestamos"
+                  ],
+                  "query": [
+                    {
+                      "key": "estado",
+                      "value": "ACTIVO"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "716"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"2cc-1lwpZFR9iJjEizlPQCK1XlCeros\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:56:36 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "[\n  {\n    \"id\": 3,\n    \"socioId\": 3,\n    \"libroId\": 4,\n    \"estado\": \"ACTIVO\",\n    \"fechaPrestamo\": \"2026-10-27T01:43:01.913Z\",\n    \"fechaLimite\": \"2026-11-10T01:43:01.902Z\",\n    \"fechaDevolucion\": null,\n    \"libro\": {\n      \"id\": 4,\n      \"titulo\": \"Node.js Design Patterns\",\n      \"autor\": \"Mario Casciaro\"\n    }\n  },\n  {\n    \"id\": 2,\n    \"socioId\": 3,\n    \"libroId\": 3,\n    \"estado\": \"ACTIVO\",\n    \"fechaPrestamo\": \"2026-10-27T01:43:01.909Z\",\n    \"fechaLimite\": \"2026-11-10T01:43:01.902Z\",\n    \"fechaDevolucion\": null,\n    \"libro\": {\n      \"id\": 3,\n      \"titulo\": \"Clean Code\",\n      \"autor\": \"Robert C. Martin\"\n    }\n  },\n  {\n    \"id\": 1,\n    \"socioId\": 3,\n    \"libroId\": 2,\n    \"estado\": \"ACTIVO\",\n    \"fechaPrestamo\": \"2026-10-27T01:43:01.905Z\",\n    \"fechaLimite\": \"2026-11-10T01:43:01.902Z\",\n    \"fechaDevolucion\": null,\n    \"libro\": {\n      \"id\": 2,\n      \"titulo\": \"El amor en los tiempos del cólera\",\n      \"autor\": \"Gabriel García Márquez\"\n    }\n  }\n]"
+            },
+            {
+              "name": "Estado inválido (400)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/socios/3/prestamos?estado=PENDIENTE",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "socios",
+                    "3",
+                    "prestamos"
+                  ],
+                  "query": [
+                    {
+                      "key": "estado",
+                      "value": "PENDIENTE"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "106"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"6a-NhTkBYw9fpZ1Ak1UNXuQRUA3hPQ\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:58:33 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Datos inválidos\",\n  \"detalles\": [\n    {\n      \"campo\": \"estado\",\n      \"mensaje\": \"estado debe ser ACTIVO o DEVUELTO\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "Socio que no existe (404)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/socios/999/prestamos",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "socios",
+                    "999",
+                    "prestamos"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "31"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1f-VXX8j9CbUvVkj5Zk6Cmd/yi53Bs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 04:00:38 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Socio no encontrado\"\n}"
             }
           ]
         }
