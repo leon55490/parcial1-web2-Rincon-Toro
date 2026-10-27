@@ -1,4 +1,3 @@
-// src/routes/socios.routes.js
 import { Router } from 'express';
 import { param, query } from 'express-validator';
 import * as prestamosControlador from '../controllers/prestamos.controller.js';
@@ -8,12 +7,9 @@ const router = Router();
 
 const ESTADOS_PRESTAMO = ['ACTIVO', 'DEVUELTO'];
 
-// P3 · GET /api/socios/:id/prestamos — historial de un socio
 router.get(
 	'/:id/prestamos',
-	param('id')
-		.isInt({ min: 1 })
-		.withMessage('El id debe ser un entero positivo'),
+	param('id').isInt({ min: 1 }).withMessage('El id debe ser un entero positivo'),
 	query('estado')
 		.optional()
 		.isIn(ESTADOS_PRESTAMO)

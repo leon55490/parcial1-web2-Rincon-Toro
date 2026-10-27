@@ -1,76 +1,54 @@
 # Biblioteca API — Parcial 1 (Programación Web 2)
 
-API REST para la gestión de préstamos de biblioteca construida con **Express 5**, **Prisma 7** y **PostgreSQL**.
+API REST para la gestión de catálogo y préstamos de una biblioteca universitaria, construida con **Express 5**, **Prisma 7** y **PostgreSQL 16** bajo una arquitectura en capas (`routes` → `controllers` → `services`).
 
-## Requisitos previos
+## 1. Levantar el proyecto desde cero
 
-- Node.js 20+
-- Docker (para la base de datos PostgreSQL)
-
-## Configuración del entorno
-
-1. Crea un archivo `.env` en la raíz del proyecto con las siguientes variables:
-
-```env
-DATABASE_URL="postgresql://campuseats:campuseats123@localhost:5433/biblioteca"
-PORT=4000
-JWT_SECRET="secreto_super_seguro"
+### Base de datos (Docker)
+```bash
+docker run --name biblioteca-db -e POSTGRES_USER=biblio -e POSTGRES_PASSWORD=secreto123 -e POSTGRES_DB=biblioteca -p 5433:5432 -d postgres:16
 ```
 
-> Si creas un contenedor nuevo para la biblioteca:
-> ```bash
-> docker run --name biblioteca-db -e POSTGRES_USER=biblio -e POSTGRES_PASSWORD=secreto123 -e POSTGRES_DB=biblioteca -p 5433:5432 -d postgres:16
-> ```
-> Usa la URL: `postgresql://biblio:secreto123@localhost:5433/biblioteca`
-
-2. Instala las dependencias:
+### Variables de entorno e instalación
+Copia `.env.example` a `.env` y ejecuta:
 
 ```bash
+cp .env.example .env
 npm install
-```
-
-3. Ejecuta las migraciones y genera el cliente de Prisma 7:
-
-```bash
 npx prisma migrate dev --config prisma7.config.ts
 npx prisma generate --config prisma7.config.ts
-```
-
-4. (Opcional) Poblar la base de datos con datos de prueba (seed):
-
-```bash
 npx prisma db seed --config prisma7.config.ts
 ```
 
-## Ejecución
-
-- **Modo desarrollo** (con recarga automática):
-  ```bash
-  npm run dev
-  ```
-- **Modo producción**:
-  ```bash
-  npm start
-  ```
-
-El servidor quedará disponible en `http://localhost:4000`.
-
-## Estructura del proyecto
-
-```text
-Parcial-1/
-├── prisma/
-│   ├── schema.prisma       # Esquema de base de datos
-│   └── seed.js             # Datos iniciales
-├── src/
-│   ├── controllers/        # Controladores HTTP
-│   ├── middlewares/        # Validación y manejo centralizado de errores
-│   ├── routes/             # Definición de endpoints y reglas de express-validator
-│   ├── services/           # Lógica de negocio y consultas con Prisma
-│   ├── app.js              # Configuración de Express
-│   ├── db.js               # Instancia de PrismaClient con @prisma/adapter-pg
-│   ├── errores.js          # Clases y helpers de errores HTTP
-│   └── server.js           # Punto de entrada del servidor
-├── prisma7.config.ts       # Configuración de Prisma 7
-└── package.json
+### Ejecución
+```bash
+npm run dev   # Desarrollo (nodemon) en http://localhost:4000
+npm start     # Producción
 ```
+
+## 2. Base de datos y Seed
+
+El esquema (`prisma/schema.prisma`) define tres modelos y un enum:
+- **`Socio`**: `id`, `nombre`, `email` (único), `creadoEn`.
+- **`Libro`**: `id`, `titulo`, `autor`, `isbn` (único), `ejemplaresTotales`, `ejemplaresDisponibles`.
+- **`Prestamo`**: `id`, `socioId`, `libroId`, `estado` (`EstadoPrestamo`: `ACTIVO` | `DEVUELTO`), `fechaPrestamo`, `fechaLimite`, `fechaDevolucion` (opcional).
+
+El seed (`prisma/seed.js`) carga **3 socios**, **5 libros** y **3 préstamos activos** del socio 3 con fecha límite a 14 días.
+
+## 3. Endpoints
+
+| Código | Método y Ruta | Descripción | Parámetros / Body | Respuestas |
+| :--- | :--- | :--- | :--- | :--- |
+| **L1** | `GET /api/libros` | Lista libros ordenados por título (`asc`) con filtros y paginación | Query: `buscar`, `disponibles` (`true`\|`false`), `pagina` ($\ge 1$), `porPagina` ($1..20$) | `200`, `400` |
+| **L2** | `GET /api/libros/:id` | Obtiene el detalle de un libro por su `id` | Param: `id` (entero positivo) | `200`, `400`, `404` |
+| **L3** | `POST /api/libros` | Registra un nuevo libro | Body: `{ titulo, autor, isbn, ejemplares (1..50) }` | `201`, `400`, `409` |
+| **P1** | `POST /api/prestamos` | Crea un préstamo a 14 días (transaccional y resistente a carrera) | Body: `{ socioId, libroId }` | `201`, `400`, `404`, `409` |
+| **P2** | `PATCH /api/prestamos/:id/devolucion` | Devuelve un préstamo y repone 1 ejemplar disponible | Param: `id` (sin body) | `200`, `400`, `404`, `409` |
+| **P3** | `GET /api/socios/:id/prestamos` | Historial de préstamos de un socio (más reciente a más antiguo, sin N+1) | Param: `id`, Query: `estado` (`ACTIVO`\|`DEVUELTO`) | `200`, `400`, `404` |
+
+## 4. Arquitectura
+
+- `src/routes/`: Validación de formato de entrada con `express-validator` y `validar.js`.
+- `src/controllers/`: Traducción entre HTTP (`req`, `res`, `next`) y la capa de negocio.
+- `src/services/`: Reglas de negocio, transacciones (`$transaction`) y errores semánticos (`noEncontrado`, `conflicto`).
+- `src/middlewares/`: Validación (`validar.js`) y manejador único de errores (`errores.js`).
