@@ -1,5 +1,3 @@
-// src/middlewares/validar.js
-// Middleware que recoge los errores de validación y corta con 400
 import { validationResult } from 'express-validator';
 
 export function validar(req, res, next) {

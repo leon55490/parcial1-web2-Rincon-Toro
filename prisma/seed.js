@@ -1,7 +1,10 @@
-// Datos iniciales de la Biblioteca. Idempotente (se puede ejecutar varias veces).
 import { prisma } from '../src/db.js';
 
 async function main() {
+	await prisma.$executeRawUnsafe(
+		'TRUNCATE TABLE "Prestamo", "Libro", "Socio" RESTART IDENTITY CASCADE;'
+	);
+
 	const socios = [
 		{ nombre: 'Laura Gómez', email: 'laura@ucaldas.edu.co' },
 		{ nombre: 'Andrés Ríos', email: 'andres@ucaldas.edu.co' },
@@ -9,11 +12,7 @@ async function main() {
 	];
 
 	for (const socio of socios) {
-		await prisma.socio.upsert({
-			where: { email: socio.email },
-			update: { nombre: socio.nombre },
-			create: socio,
-		});
+		await prisma.socio.create({ data: socio });
 	}
 
 	const libros = [
@@ -55,37 +54,20 @@ async function main() {
 	];
 
 	for (const libro of libros) {
-		await prisma.libro.upsert({
-			where: { isbn: libro.isbn },
-			update: {
-				titulo: libro.titulo,
-				autor: libro.autor,
-				ejemplaresTotales: libro.ejemplaresTotales,
-				ejemplaresDisponibles: libro.ejemplaresDisponibles,
-			},
-			create: libro,
-		});
+		await prisma.libro.create({ data: libro });
 	}
 
 	const fechaLimite = new Date(Date.now() + 14 * 24 * 60 * 60 * 1000);
 
 	const prestamos = [
-		{ id: 1, socioId: 3, libroId: 2 },
-		{ id: 2, socioId: 3, libroId: 3 },
-		{ id: 3, socioId: 3, libroId: 4 },
+		{ socioId: 3, libroId: 2 },
+		{ socioId: 3, libroId: 3 },
+		{ socioId: 3, libroId: 4 },
 	];
 
 	for (const p of prestamos) {
-		await prisma.prestamo.upsert({
-			where: { id: p.id },
-			update: {
-				socioId: p.socioId,
-				libroId: p.libroId,
-				estado: 'ACTIVO',
-				fechaLimite,
-				fechaDevolucion: null,
-			},
-			create: {
+		await prisma.prestamo.create({
+			data: {
 				socioId: p.socioId,
 				libroId: p.libroId,
 				estado: 'ACTIVO',

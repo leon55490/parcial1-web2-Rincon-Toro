@@ -1,4 +1,3 @@
-// src/server.js — solo arranca
 import app from './app.js';
 
 const PUERTO = process.env.PORT ?? 4000;

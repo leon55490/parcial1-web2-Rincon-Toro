@@ -1,4 +1,3 @@
-// src/errores.js — errores del dominio con código HTTP incorporado
 export class ErrorHttp extends Error {
 	constructor(codigo, mensaje) {
 		super(mensaje);

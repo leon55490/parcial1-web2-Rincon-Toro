@@ -1,4 +1,3 @@
-// src/middlewares/errores.js
 import { ErrorHttp } from '../errores.js';
 
 export function manejadorErrores(err, req, res, next) {

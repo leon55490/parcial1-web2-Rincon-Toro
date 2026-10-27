@@ -1,0 +1,747 @@
+{
+  "info": {
+    "_postman_id": "2f94a0f3-c27d-4e76-a9a6-059c0f0c43c5",
+    "name": "Parcial 1",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "25745520"
+  },
+  "item": [
+    {
+      "name": "libros",
+      "item": [
+        {
+          "name": "Listar libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": ""
+            }
+          },
+          "response": [
+            {
+              "name": "Listar Libros (400)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "768"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"300-go1EyLVk3EvkSfYcQuGnIdGDhGw\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:01:06 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"datos\": [\n    {\n      \"id\": 1,\n      \"titulo\": \"Cien años de soledad\",\n      \"autor\": \"Gabriel García Márquez\",\n      \"isbn\": \"ISBN-001\",\n      \"ejemplaresTotales\": 3,\n      \"ejemplaresDisponibles\": 3\n    },\n    {\n      \"id\": 3,\n      \"titulo\": \"Clean Code\",\n      \"autor\": \"Robert C. Martin\",\n      \"isbn\": \"ISBN-003\",\n      \"ejemplaresTotales\": 1,\n      \"ejemplaresDisponibles\": 0\n    },\n    {\n      \"id\": 2,\n      \"titulo\": \"El amor en los tiempos del cólera\",\n      \"autor\": \"Gabriel García Márquez\",\n      \"isbn\": \"ISBN-002\",\n      \"ejemplaresTotales\": 2,\n      \"ejemplaresDisponibles\": 1\n    },\n    {\n      \"id\": 5,\n      \"titulo\": \"La vorágine\",\n      \"autor\": \"José Eustasio Rivera\",\n      \"isbn\": \"ISBN-005\",\n      \"ejemplaresTotales\": 1,\n      \"ejemplaresDisponibles\": 1\n    },\n    {\n      \"id\": 4,\n      \"titulo\": \"Node.js Design Patterns\",\n      \"autor\": \"Mario Casciaro\",\n      \"isbn\": \"ISBN-004\",\n      \"ejemplaresTotales\": 2,\n      \"ejemplaresDisponibles\": 1\n    }\n  ],\n  \"paginacion\": {\n    \"pagina\": 1,\n    \"porPagina\": 10,\n    \"total\": 5,\n    \"totalPaginas\": 1\n  }\n}"
+            },
+            {
+              "name": "Listar libros por autor (200)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros?buscar=garcía",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ],
+                  "query": [
+                    {
+                      "key": "buscar",
+                      "value": "garcía"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "378"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"17a-8pmE4/t0EvtaKizSBfiFWjGgbtk\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:01:44 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"datos\": [\n    {\n      \"id\": 1,\n      \"titulo\": \"Cien años de soledad\",\n      \"autor\": \"Gabriel García Márquez\",\n      \"isbn\": \"ISBN-001\",\n      \"ejemplaresTotales\": 3,\n      \"ejemplaresDisponibles\": 3\n    },\n    {\n      \"id\": 2,\n      \"titulo\": \"El amor en los tiempos del cólera\",\n      \"autor\": \"Gabriel García Márquez\",\n      \"isbn\": \"ISBN-002\",\n      \"ejemplaresTotales\": 2,\n      \"ejemplaresDisponibles\": 1\n    }\n  ],\n  \"paginacion\": {\n    \"pagina\": 1,\n    \"porPagina\": 10,\n    \"total\": 2,\n    \"totalPaginas\": 1\n  }\n}"
+            },
+            {
+              "name": "Listar libros disponibles (200)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros?disponibles=true",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ],
+                  "query": [
+                    {
+                      "key": "disponibles",
+                      "value": "true"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "644"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"284-4T+GsJWuLB2bc3gf0Z4t0HJzDBs\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:03:40 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"datos\": [\n    {\n      \"id\": 1,\n      \"titulo\": \"Cien años de soledad\",\n      \"autor\": \"Gabriel García Márquez\",\n      \"isbn\": \"ISBN-001\",\n      \"ejemplaresTotales\": 3,\n      \"ejemplaresDisponibles\": 3\n    },\n    {\n      \"id\": 2,\n      \"titulo\": \"El amor en los tiempos del cólera\",\n      \"autor\": \"Gabriel García Márquez\",\n      \"isbn\": \"ISBN-002\",\n      \"ejemplaresTotales\": 2,\n      \"ejemplaresDisponibles\": 1\n    },\n    {\n      \"id\": 5,\n      \"titulo\": \"La vorágine\",\n      \"autor\": \"José Eustasio Rivera\",\n      \"isbn\": \"ISBN-005\",\n      \"ejemplaresTotales\": 1,\n      \"ejemplaresDisponibles\": 1\n    },\n    {\n      \"id\": 4,\n      \"titulo\": \"Node.js Design Patterns\",\n      \"autor\": \"Mario Casciaro\",\n      \"isbn\": \"ISBN-004\",\n      \"ejemplaresTotales\": 2,\n      \"ejemplaresDisponibles\": 1\n    }\n  ],\n  \"paginacion\": {\n    \"pagina\": 1,\n    \"porPagina\": 10,\n    \"total\": 4,\n    \"totalPaginas\": 1\n  }\n}"
+            },
+            {
+              "name": "Listar libros por filtros (200)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros?buscar=code&disponibles=false&pagina=1&porPagina=2",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ],
+                  "query": [
+                    {
+                      "key": "buscar",
+                      "value": "code"
+                    },
+                    {
+                      "key": "disponibles",
+                      "value": "false"
+                    },
+                    {
+                      "key": "pagina",
+                      "value": "1"
+                    },
+                    {
+                      "key": "porPagina",
+                      "value": "2"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "202"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"ca-/Lf2vmFJXDWa+ZZGbnz4B0Rpj9I\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:05:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"datos\": [\n    {\n      \"id\": 3,\n      \"titulo\": \"Clean Code\",\n      \"autor\": \"Robert C. Martin\",\n      \"isbn\": \"ISBN-003\",\n      \"ejemplaresTotales\": 1,\n      \"ejemplaresDisponibles\": 0\n    }\n  ],\n  \"paginacion\": {\n    \"pagina\": 1,\n    \"porPagina\": 2,\n    \"total\": 1,\n    \"totalPaginas\": 1\n  }\n}"
+            },
+            {
+              "name": "Listar libros error validación (400)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros?disponibles= talVez&pagina=0&porPagina=50",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ],
+                  "query": [
+                    {
+                      "key": "disponibles",
+                      "value": " talVez"
+                    },
+                    {
+                      "key": "pagina",
+                      "value": "0"
+                    },
+                    {
+                      "key": "porPagina",
+                      "value": "50"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "250"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"fa-9lJwuKMJmMt883LGx29mbK4KnIE\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:06:37 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Datos inválidos\",\n  \"detalles\": [\n    {\n      \"campo\": \"disponibles\",\n      \"mensaje\": \"disponibles debe ser true o false\"\n    },\n    {\n      \"campo\": \"pagina\",\n      \"mensaje\": \"pagina debe ser un entero ≥ 1\"\n    },\n    {\n      \"campo\": \"porPagina\",\n      \"mensaje\": \"porPagina debe ser un entero entre 1 y 20\"\n    }\n  ]\n}"
+            }
+          ]
+        },
+        {
+          "name": "Ver un libro por ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:4000/api/libros/999",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "libros",
+                "999"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Ver libro existente (200)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros/1",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros",
+                    "1"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "142"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"8e-KLvIAQwtzKeOEQhRYtEZe/RmWS4\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 02:44:57 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 1,\n  \"titulo\": \"Cien años de soledad\",\n  \"autor\": \"Gabriel García Márquez\",\n  \"isbn\": \"ISBN-001\",\n  \"ejemplaresTotales\": 3,\n  \"ejemplaresDisponibles\": 3\n}"
+            },
+            {
+              "name": "ID inválido (400)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros/abc",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros",
+                    "abc"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "102"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"66-i7qcfFS17H71NCHgV33DumE00M8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 02:57:08 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Datos inválidos\",\n  \"detalles\": [\n    {\n      \"campo\": \"id\",\n      \"mensaje\": \"El id debe ser un entero positivo\"\n    }\n  ]\n}"
+            },
+            {
+              "name": "Libro que no existe (404)",
+              "originalRequest": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "http://localhost:4000/api/libros/999",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros",
+                    "999"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "31"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"1f-r40I3blXCrq1C/QbVOowi+bee9Y\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 02:58:21 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Libro no encontrado\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Registrar Libro",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n  \"titulo\": \"   \",\r\n  \"autor\": \"\",\r\n  \"isbn\": \"ISBN-007\",\r\n  \"ejemplares\": 100\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:4000/api/libros",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "4000",
+              "path": [
+                "api",
+                "libros"
+              ]
+            }
+          },
+          "response": [
+            {
+              "name": "Registrar Libro (201)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"titulo\": \"Rayuela\",\r\n  \"autor\": \"Julio Cortázar\",\r\n  \"isbn\": \"ISBN-006\",\r\n  \"ejemplares\": 4,\r\n  \"ejemplaresDisponibles\": 0\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/libros",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "119"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"77-IVDaJS/Ezc2HMYvpCCtEEJHUeAc\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:09:07 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"id\": 6,\n  \"titulo\": \"Rayuela\",\n  \"autor\": \"Julio Cortázar\",\n  \"isbn\": \"ISBN-006\",\n  \"ejemplaresTotales\": 4,\n  \"ejemplaresDisponibles\": 4\n}"
+            },
+            {
+              "name": "ISBN repetido (409)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"titulo\": \"Otro libro\",\r\n  \"autor\": \"Gabriel García Márquez\",\r\n  \"isbn\": \"ISBN-001\",\r\n  \"ejemplares\": 2\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/libros",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ]
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "55"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"37-37UREIeEQwsuLqCE2qXHwX37PM8\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:10:15 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Ya existe un libro con el ISBN \\\"ISBN-001\\\"\"\n}"
+            },
+            {
+              "name": "Datos inválidos (400)",
+              "originalRequest": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n  \"titulo\": \"   \",\r\n  \"autor\": \"\",\r\n  \"isbn\": \"ISBN-007\",\r\n  \"ejemplares\": 100\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "http://localhost:4000/api/libros",
+                  "protocol": "http",
+                  "host": [
+                    "localhost"
+                  ],
+                  "port": "4000",
+                  "path": [
+                    "api",
+                    "libros"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "X-Powered-By",
+                  "value": "Express"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json; charset=utf-8"
+                },
+                {
+                  "key": "Content-Length",
+                  "value": "230"
+                },
+                {
+                  "key": "ETag",
+                  "value": "W/\"e6-ePdGrrTp5mhy6ksiSDmHqJ3PpSY\""
+                },
+                {
+                  "key": "Date",
+                  "value": "Tue, 27 Oct 2026 03:11:10 GMT"
+                },
+                {
+                  "key": "Connection",
+                  "value": "keep-alive"
+                },
+                {
+                  "key": "Keep-Alive",
+                  "value": "timeout=5"
+                }
+              ],
+              "cookie": [],
+              "body": "{\n  \"error\": \"Datos inválidos\",\n  \"detalles\": [\n    {\n      \"campo\": \"titulo\",\n      \"mensaje\": \"El título es obligatorio\"\n    },\n    {\n      \"campo\": \"autor\",\n      \"mensaje\": \"El autor es obligatorio\"\n    },\n    {\n      \"campo\": \"ejemplares\",\n      \"mensaje\": \"ejemplares debe ser un entero entre 1 y 50\"\n    }\n  ]\n}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
